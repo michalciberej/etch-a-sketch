@@ -1,0 +1,62 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #202020;
+  }
+
+  #mainContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    text-align: center;
+    margin-top: 150px;
+    background-color: #404040;
+    padding: 40px;
+  }
+  
+  #squaresContainer {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: aqua;
+  }
+  
+  #leftContainer {
+    width: 150px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .squares {
+    width: 23px;
+    height: 23px;
+    background: white;
+    border: 1px solid black;
+  }
+
+  #colorPicker {
+    width: 100px;
+    height: 100px;
+    border: none;
+    align-self: center;
+    background: none;
+  }
+
+  #colorPicker::-webkit-color-swatch {
+    border-radius: 15px;
+    border: 3px solid #808080;
+  }
+
+  #colorPicker:hover {
+    cursor: pointer;
+  }
