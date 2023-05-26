@@ -3,6 +3,7 @@ const inputColor = document.querySelector("#inputColor");
 const eraser = document.querySelector("#eraser");
 const rainbowColor = document.querySelector("#colorRainbow");
 const inputSlider = document.querySelector("#slider");
+const labelSlider = document.querySelector("#label")
 let colorSelect = "black";
 let color = "black";
 let sliderValue = 16;
@@ -17,6 +18,8 @@ function generateRainbow() {
 eraser.addEventListener("click", () => {
     color = "white";
     colorSelect = "white";
+    eraser.classList.toggle("active");
+    rainbowColor.classList.remove("active");
   })
   
 inputColor.addEventListener("input", () => {
@@ -25,8 +28,14 @@ inputColor.addEventListener("input", () => {
 })
   
 rainbowColor.addEventListener("click", () => 
-    colorSelect = "rainbow");
+    {colorSelect = "rainbow";
+    rainbowColor.classList.toggle("active");
+    eraser.classList.remove("active");
+  });
 
+function updateLabel() {
+    labelSlider.textContent = sliderValue + "x" + sliderValue
+}
 
 //CREATE GRID
 
@@ -34,6 +43,7 @@ rainbowColor.addEventListener("click", () =>
 inputSlider.addEventListener("input", () => {
     sliderValue = inputSlider.value;
     generateSquares(sliderValue, sliderValue);
+    updateLabel();
 })
 
 function generateSquares(sliderValue, sliderValue) {
@@ -96,3 +106,4 @@ mainContainer.addEventListener("mouseup", (event) => {
 )
 
 generateSquares(16, 16);
+updateLabel();
