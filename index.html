@@ -8,17 +8,14 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <div id="mainContainer">
+    <div id="container">
         <div id="leftContainer">
-            <input id="colorPicker" type="color" value="#fff">
+            <input id="inputColor" type="color" value="#fff">
             <button id="eraser">Eraser</button>
             <button id="colorRainbow">Rainbow</button>
-            <button id="smallSizeSquares">8x8</button>
-            <button id="mediumSizeSquares">16x16</button>
-            <button id="largeSizeSquares">32x32</button>
-            <button id="maxSizeSquares">64x64</button>
+            <input id="slider" type="range" min="4" max="64" value="16" step="1">
         </div>
-        <div id="squaresContainer"></div>
+        <div id="mainContainer"></div>
     </div>
 
 

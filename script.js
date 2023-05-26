@@ -1,52 +1,98 @@
-let color = "";
-const container = document.querySelector("#squaresContainer");
-const colorPicker = document.querySelector("#colorPicker");
+const mainContainer = document.querySelector("#mainContainer");
+const inputColor = document.querySelector("#inputColor");
 const eraser = document.querySelector("#eraser");
-const rainbow = document.querySelector("#colorRainbow");
-const smallSizeSquares = document.querySelector("#smallSizeSquares");
-const mediumSizeSquares = document.querySelector("#mediumSizeSquares");
-const largeSizeSquares = document.querySelector("#largeSizeSquares");
-const maxSizeSquares = document.querySelector("#maxSizeSquares");
+const rainbowColor = document.querySelector("#colorRainbow");
+const inputSlider = document.querySelector("#slider");
+let colorSelect = "black";
+let color = "black";
+let sliderValue = 16;
+let widthHeight = 0;
 
-colorPicker.addEventListener("change", (event) => {
-    color = event.target.value;
-});
-eraser.addEventListener("click", (event) => {
+//COLOR
+function generateRainbow() {
+    color ="#" + Math.floor(Math.random() * 16777215).
+    toString(16);
+}
 
-});
-rainbow.addEventListener("click", (event) => {
+eraser.addEventListener("click", () => {
+    color = "white";
+    colorSelect = "white";
+  })
+  
+inputColor.addEventListener("input", () => {
+    color = inputColor.value;
+    colorSelect = "inputColor";
+})
+  
+rainbowColor.addEventListener("click", () => 
+    colorSelect = "rainbow");
 
-});
-smallSizeSquares.addEventListener("click", () => {
-    createSquares(8, 8);
-    container.querySelectorAll("div").classList.add("mediumSquares");
-    smallSizeSquares.classList.toggle("active");
+
+//CREATE GRID
+
+
+inputSlider.addEventListener("input", () => {
+    sliderValue = inputSlider.value;
+    generateSquares(sliderValue, sliderValue);
 })
 
-mediumSizeSquares.addEventListener("click", () => {
-    createSquares(16, 16)
-    mediumSizeSquares.classList.toggle("active")
-})
+function generateSquares(sliderValue, sliderValue) {
+    mainContainer.innerHTML = "";
+    for (let i = 0; i < sliderValue * sliderValue; i++) {
+      square(sliderValue);
+    }
+  }
 
-largeSizeSquares.addEventListener("click", () => {
-    createSquares(32, 32)
-    largeSizeSquares.classList.toggle("active")
-})
-    
-maxSizeSquares.addEventListener("click", () => {
-    createSquares(64,64);
-    maxSizeSquares.classList.toggle("active");
-});
-//square.addEventListener("hovering", () => );
-
-function square() {
+function square(sliderValue) {
+    widthHeight = 400 / sliderValue;
     const square = document.createElement("div");
-    square.classList.add("squares");
-    container.appendChild(square);
+    square.style.width = widthHeight +"px";
+    square.style.height = widthHeight +"px";
+    mainContainer.appendChild(square);
 }
 
-function createSquares(row, column) {
-  for (let i = 0; i < row * column ; i++) {
-        square();
- }  
-}
+
+//////////////////////
+let isMouseDown = false;
+mainContainer.addEventListener("mousedown", () => isMouseDown = true);
+mainContainer.addEventListener("mouseup", () => isMouseDown = false);
+
+mainContainer.addEventListener("mousedown", (event) => {
+  if (isMouseDown) { 
+   event.preventDefault();
+   if (colorSelect == "rainbow") {
+      generateRainbow()
+      event.target.style.background = color; 
+    } else {
+      event.target.style.background = color; 
+   }
+  }
+ }
+)
+
+mainContainer.addEventListener("mouseover", (event) => {
+  if (isMouseDown) {
+    if (colorSelect == "rainbow") {
+      generateRainbow()
+      event.target.style.background = color; 
+    } else {
+      event.target.style.background = color; 
+   }
+  }
+ }
+)
+
+mainContainer.addEventListener("mouseup", (event) => {
+  if (isMouseDown) { 
+   if (colorSelect == "rainbow") {
+      generateRainbow()
+      event.target.style.background = color; 
+    } else {
+      event.target.style.background = color; 
+   }
+  isMouseDown = false;
+  }
+ }
+)
+
+generateSquares(16, 16);
